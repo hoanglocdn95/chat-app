@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import Messages from './message-list';
+import MessagesList from './message-list';
 import Input from './input';
 import _map from 'lodash/map';
 import io from 'socket.io-client';
@@ -19,7 +19,7 @@ export default class App extends Component {
     }
     this.socket = null;
   }
-    //Connetct với server nodejs, thông qua socket.io
+    //Connect với server nodejs, thông qua socket.io
   componentWillMount() {
     this.socket = io('localhost:6969');
     // lắng nghe event có tên 'id'
@@ -34,7 +34,7 @@ export default class App extends Component {
     let max = Math.max(...ids);
     messages.push({
         id: max+1,
-        userId: m.id,
+        userId: m.userID,
         message: m.message
     });
 
@@ -64,7 +64,10 @@ export default class App extends Component {
       <div className="app__content">
         <h1>chat box</h1>
         <div className="chat_window">
-          <Messages user={this.state.user} messages={this.state.messages} typing={this.state.typing}/>
+          <MessagesList
+            user={this.state.user}
+            messages={this.state.messages}
+          />
           <Input sendMessage={this.sendnewMessage}/>
         </div>
       </div>

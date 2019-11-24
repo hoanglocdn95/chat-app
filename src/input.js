@@ -9,14 +9,19 @@ export default class Input extends Component {
     }
   }
 
+  handleSendMessages = () => {
+    this.props.sendMessage(this.refs.message);
+    this.setState({
+      value: ''
+    })
+  }
+
   enterKey = e => {
     if (e.keyCode === 13) {
-      this.props.sendMessage(this.refs.message);
-      this.setState({
-        value: ''
-      })
+      this.handleSendMessages();
     }
   }
+ 
   handleOnChange = e => {
     this.setState({
       value: e.target.value
@@ -37,7 +42,7 @@ export default class Input extends Component {
         </div>
         <div
           className="send_message"
-          onClick={() => this.props.sendMessage(this.refs.message)}
+          onClick={() => this.handleSendMessages()}
         >
           <div className="icon"></div>
           <div className="text">Send</div>

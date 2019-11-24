@@ -1,15 +1,14 @@
 import React from "react";
-import Message from "./message-item";
+import MessageItem from "./message-item";
 
-export default class MessageItem extends React.Component {
+export default class MessagesList extends React.Component {
   render() {
     return (
       <ul className="messages">
         {this.props.messages.map(item => (
-          <Message
+          <MessageItem
             key={item.id}
-            user={item.userId === this.props.user ? true : false}
-            message={item.message}
+            data={item}
           />
         ))}
       </ul>

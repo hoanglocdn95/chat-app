@@ -8,6 +8,7 @@ server.listen(port, () => console.log("Server running in port " + port));
 
 var userOnline = []; //danh sách user dang online
 io.on("connection", function(socket) {
+console.log("TCL: socket", socket)
   console.log(socket.id + ": connected");
   //lắng nghe khi người dùng thoát
   socket.on("disconnect", function() {
@@ -18,11 +19,9 @@ io.on("connection", function(socket) {
   });
   //lắng nghe khi có người gửi tin nhắn
   socket.on("newMessage", data => {
-    console.log("TCL: SERVER => data", data);
     //gửi lại tin nhắn cho tất cả các user dang online
     io.sockets.emit("newMessage", {
-    //   data: data.data,
-    //   user: data.user,
+      userID: socket.id,
       message: data,
     });
   });
